@@ -2,6 +2,8 @@
 
 A lightweight, zero-backend, privacy-centric utility web suite built with Vanilla ES6+ JavaScript, HTML5, and a custom CSS/Tailwind design system. Runs 100% client-side with sub-millisecond execution and zero telemetry.
 
+**Live Testing App:** [https://coreutils.pages.dev](https://coreutils.pages.dev)
+
 ---
 
 ## Modules & Capabilities
