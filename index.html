@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Synchronously initialize theme based on browser/OS preference before render to prevent flash -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('coreutils_theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+
+  <!-- Web App Favicon & Apple Touch Icon from assets/img/logo.png -->
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+  <link rel="apple-touch-icon" href="assets/img/logo.png" />
+
+  <!-- Preconnect to Google Fonts for instant luxury font rendering -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <title>CoreUtils</title>
+  <meta name="description"
+    content="Lightweight, zero-backend, privacy-centric utility suite. Clean tracking links and open WhatsApp chats directly without saving contacts." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <!-- Custom Design System Styles -->
+  <link rel="stylesheet" href="assets/css/styles.css?v=1788950916441" />
+</head>
+
+<body class="min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white">
+
+  <!-- DYNAMIC AMBIENT GLOW ORBS (BACKGROUND GLASSMORPHISM FOR LIGHT & DARK) -->
+  <div class="ambient-glow-wrapper" aria-hidden="true">
+    <div class="ambient-orb ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-2"></div>
+    <div class="ambient-orb ambient-orb-3"></div>
+  </div>
+
+  <!-- TOP HEADER (Premium Sticky Frosted Navbar - Only Body Scrolls) -->
+  <header class="navbar-glass w-full">
+    <div class="max-w-5xl mx-auto px-3 sm:px-6 py-2.5 sm:py-3.5 flex items-center justify-between">
+
+      <!-- Brand Logo & Title -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <div class="w-9 h-9 sm:w-11 sm:h-11 flex-shrink-0">
+          <img src="assets/img/logo.png" alt="CoreUtils Logo"
+            class="w-full h-full object-contain rounded-xl select-none" />
+        </div>
+        <h1 class="text-lg sm:text-2xl font-extrabold tracking-tight brand-name-jakarta" data-i18n="appTitle">
+          CoreUtils</h1>
+      </div>
+
+      <!-- Controls: Redesigned Minimalist Language Switcher & Theme Toggle -->
+      <div class="flex items-center gap-2 sm:gap-3">
+
+        <!-- Modern Luxury Language Switcher -->
+        <div class="lang-switcher-modern" role="group" aria-label="Language Selection">
+          <button id="langBtnEn" type="button" class="lang-switch-btn active" title="English">
+            <i class="bi bi-globe2 text-xs"></i>
+            <span>EN</span>
+          </button>
+          <button id="langBtnAr" type="button" class="lang-switch-btn" title="العربية">
+            <span>العربية</span>
+          </button>
+        </div>
+
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" type="button" class="theme-toggle-solid" title="Toggle Theme"
+          aria-label="Toggle Theme">
+          <i id="themeIcon" class="bi bi-sun text-amber-400"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN APPLICATION CONTENT -->
+  <main id="mainAppContent"
+    class="w-full max-w-4xl mx-auto px-3.5 sm:px-6 py-5 sm:py-7 flex-grow flex flex-col justify-start relative z-10">
+
+    <!-- PHYSICAL SLIDING TAB CONTROLLER -->
+    <div id="tabContainer" class="tab-container max-w-md mx-auto mb-6 w-full shadow-sm" role="tablist">
+      <!-- Sliding Indicator Capsule -->
+      <div id="tabSliderIndicator" class="tab-slider-indicator"></div>
+
+      <button id="tabDisinfector" type="button" role="tab" aria-selected="true" class="tab-btn active">
+        <i class="bi bi-link-45deg text-lg"></i>
+        <span data-i18n="tabDisinfector">URL Disinfector</span>
+      </button>
+      <button id="tabWhatsApp" type="button" role="tab" aria-selected="false" class="tab-btn">
+        <i class="bi bi-whatsapp text-lg"></i>
+        <span data-i18n="tabWhatsApp">Direct WhatsApp</span>
+      </button>
+    </div>
+
+    <!-- MODULE 1: URL DISINFECTOR PANEL -->
+    <section id="panelDisinfector" class="glass-panel p-6 sm:p-8 panel-transition" role="tabpanel">
+
+      <!-- Panel Header -->
+      <div class="mb-6">
+        <div class="flex items-center gap-2 text-brand-accent text-xs uppercase tracking-wider font-semibold mb-1">
+          <i class="bi bi-magic"></i>
+          <span data-i18n="categoryPrivacy">Privacy Sanitizer</span>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-bold mb-2" data-i18n="disinfectorHeading">
+          Sanitize & Strip Tracking Parameters
+        </h2>
+        <p class="text-sm text-[var(--text-muted)] leading-relaxed" data-i18n="disinfectorDesc">
+          Remove surveillance tokens (utm_*, fbclid, gclid, TikTok, YouTube & other trackers) and e-commerce bloat in
+          few seconds.
+        </p>
+      </div>
+
+      <!-- URL Input Field with Dedicated Top Header Bar for Paste Button -->
+      <div class="space-y-4">
+        <div>
+          <!-- Label and Unobtrusive Paste Button Bar -->
+          <div class="flex items-center justify-between mb-2">
+            <label class="block text-xs font-semibold text-[var(--text-muted)]" data-i18n="labelInputUrl">
+              Target Link / URL
+            </label>
+            <button id="btnQuickPaste" type="button" class="btn-top-paste" title="Paste from clipboard">
+              <i class="bi bi-clipboard-pulse text-brand-accent"></i>
+              <span data-i18n="btnPaste">Paste Link</span>
+            </button>
+          </div>
+
+          <textarea id="inputUrl" rows="3" class="custom-input w-full p-4 text-sm resize-none focus:outline-none"
+            placeholder="Paste any link here (e.g. https://example.com/page?utm_source=...)"
+            data-i18n-placeholder="inputUrlPlaceholder"></textarea>
+          <div id="urlFeedback" class="inline-field-feedback" aria-live="polite"></div>
+        </div>
+
+        <!-- Action Buttons & Samples -->
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5">
+            <button id="btnCleanUrl" type="button" class="btn-primary px-5 py-2.5 text-sm">
+              <i class="bi bi-shield-check text-base"></i>
+              <span data-i18n="btnClean">Disinfect URL</span>
+            </button>
+            <button id="btnClearUrl" type="button" class="btn-secondary px-4 py-2.5 text-sm hidden">
+              <i class="bi bi-x-circle text-base"></i>
+              <span data-i18n="btnClear">Clear</span>
+            </button>
+          </div>
+
+          <!-- Sample Links Block: Desktop Row, Mobile 2x2 Grid with Label -->
+          <div class="sample-links-block">
+            <span class="sample-links-label" data-i18n="sampleLinksTitle">Try sample links:</span>
+            <div class="sample-links-grid">
+              <button type="button" class="sample-link-btn" data-type="utm" data-i18n="sampleMarketing">Marketing Link
+                (UTM)</button>
+              <button type="button" class="sample-link-btn" data-type="youtube"
+                data-i18n="sampleYoutube">YouTube</button>
+              <button type="button" class="sample-link-btn" data-type="amazon" data-i18n="sampleAmazon">Amazon
+                Product</button>
+              <button type="button" class="sample-link-btn" data-type="tiktok" data-i18n="sampleTiktok">TikTok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Container (Hidden initially, with premium reveal animation) -->
+      <div id="disinfectorResult" class="mt-6 pt-6 border-t border-[var(--border-card)] hidden space-y-4">
+        <div>
+          <div class="flex flex-wrap items-center justify-between gap-2.5 mb-2.5">
+            <div class="flex flex-wrap items-center gap-2">
+              <label class="text-xs font-semibold uppercase tracking-wider text-brand-accent flex items-center gap-1.5">
+                <i class="bi bi-check2-circle text-base"></i>
+                <span data-i18n="outputCleanUrlLabel">Cleaned Safe URL</span>
+              </label>
+              <span id="speedStat"
+                class="text-xs font-mono font-semibold px-2 py-0.5 rounded-md bg-brand-badge border border-emerald-500/20">
+                ⚡ 0.8ms
+              </span>
+              <span id="badgeUnwrappedTag"
+                class="text-xs font-medium px-2 py-0.5 rounded-md bg-sky-500/10 border border-sky-500/20 text-sky-400 hidden flex items-center gap-1">
+                <i class="bi bi-arrow-repeat"></i>
+                <span data-i18n="badgeUnwrapped">Redirect Unwrapped</span>
+              </span>
+              <span id="badgeAutoFixedTag"
+                class="text-xs font-medium px-2 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hidden flex items-center gap-1">
+                <i class="bi bi-magic"></i>
+                <span data-i18n="badgeAutoFixed">Auto-Added https://</span>
+              </span>
+            </div>
+
+            <!-- Header Action Buttons (Open Link & Copy Clean URL) -->
+            <div class="flex items-center gap-2 flex-shrink-0">
+              <a id="btnOpenCleanUrl" href="#" target="_blank" rel="noopener noreferrer"
+                class="btn-clean-action btn-clean-open" data-i18n-title="tooltipOpenLink"
+                title="Open cleaned link safely in new tab">
+                <i class="bi bi-box-arrow-up-right text-xs"></i>
+                <span data-i18n="btnOpenLink">Open Clean URL</span>
+              </a>
+              <button id="btnCopyCleanUrl" type="button" class="btn-clean-action btn-clean-copy">
+                <i id="copyIcon" class="bi bi-copy"></i>
+                <span id="copyLabel" data-i18n="btnCopy">Copy Clean URL</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Full Uncut URL Box (100% width, multiline text wrapping, zero overlap) -->
+          <div class="output-glow-box">
+            <textarea id="outputCleanUrl" rows="2" readonly
+              class="custom-input input-clean-url w-full p-3.5 text-sm font-mono resize-none focus:outline-none"
+              placeholder="Cleaned URL will appear here..."></textarea>
+          </div>
+        </div>
+
+        <!-- Stripped Parameters Badges -->
+        <div id="strippedParamsContainer">
+          <p class="text-xs font-semibold text-[var(--text-muted)] mb-2.5" data-i18n="statsStripped">
+            Tracking parameters stripped:
+          </p>
+          <div id="paramChipsList" class="flex flex-wrap gap-2">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- MODULE 2: DIRECT WHATSAPP PANEL -->
+    <section id="panelWhatsApp" class="glass-panel p-6 sm:p-8 hidden" role="tabpanel">
+
+      <!-- Panel Header -->
+      <div class="mb-6">
+        <div class="flex items-center gap-2 text-brand-accent text-xs uppercase tracking-wider font-semibold mb-1">
+          <i class="bi bi-chat-dots"></i>
+          <span data-i18n="categoryMessenger">Direct Messenger</span>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-bold mb-2" data-i18n="whatsappHeading">
+          Open WhatsApp Chat Instantly
+        </h2>
+        <p class="text-sm text-[var(--text-muted)] leading-relaxed" data-i18n="whatsappDesc">
+          Start a conversation directly without saving temporary contacts to your phone's address book.
+        </p>
+      </div>
+
+      <!-- Universal Phone Number & Dial Code Form -->
+      <div class="space-y-4">
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+
+          <!-- Country Dial Selector -->
+          <div class="sm:col-span-1">
+            <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5" data-i18n="labelCountry">
+              Country Code
+            </label>
+            <div class="relative">
+              <select id="countrySelect" class="custom-input w-full p-3.5 text-sm appearance-none cursor-pointer pe-9">
+                <!-- Populated dynamically via JS -->
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 end-0 flex items-center px-3 text-[var(--text-muted)]">
+                <i class="bi bi-chevron-down text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone Number Input with Real-Time Interactive Validation -->
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-semibold text-[var(--text-muted)] mb-1.5" data-i18n="labelPhone">
+              Phone Number
+            </label>
+            <div class="relative">
+              <input id="inputPhone" type="tel" class="custom-input w-full p-3.5 text-sm" placeholder=".........."
+                data-i18n-placeholder="phonePlaceholder" enterkeyhint="go" autocomplete="tel" />
+            </div>
+            <div id="phoneFeedback" class="inline-field-feedback" aria-live="polite"></div>
+          </div>
+
+        </div>
+
+        <!-- Action Buttons (Open in WhatsApp + Copy Direct Link) -->
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <button id="btnOpenWhatsApp" type="button" class="btn-primary px-6 py-3 text-sm">
+            <i class="bi bi-whatsapp text-lg"></i>
+            <span data-i18n="btnOpenChat">Open in WhatsApp</span>
+          </button>
+
+          <button id="btnCopyWaLink" type="button" class="btn-secondary px-5 py-3 text-sm">
+            <i id="copyWaIcon" class="bi bi-link-45deg text-lg"></i>
+            <span id="copyWaLabel" data-i18n="btnCopyLink">Copy Direct Link</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Recent Numbers History -->
+      <div class="mt-8 pt-6 border-t border-[var(--border-card)]">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider flex items-center gap-1.5">
+            <i class="bi bi-clock-history text-brand-accent"></i>
+            <span data-i18n="recentNumbersTitle">Recent Numbers</span>
+          </h3>
+          <button id="btnClearWaHistory" type="button"
+            class="text-xs text-[var(--text-muted)] hover:text-red-400 transition-colors cursor-pointer hidden"
+            data-i18n="btnClearHistory">
+            Clear History
+          </button>
+        </div>
+
+        <div id="recentNumbersList" class="flex flex-wrap gap-2">
+          <p id="recentNumbersEmpty" class="text-xs text-[var(--text-muted)] italic" data-i18n="recentNumbersEmpty">
+            No recent numbers yet. Your past 5 direct chats will be saved locally for quick reuse.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- TOAST NOTIFICATIONS CONTAINER -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- FOOTER (Luxury Frosted Glass Capsule for Desktop & Mobile) -->
+  <footer
+    class="w-full max-w-5xl mx-auto px-4 sm:px-6 pt-1 sm:pt-4 pb-3 sm:pb-6 text-center text-xs relative z-10 mt-auto flex justify-center">
+    <div class="footer-glass-pill inline-flex items-center gap-2.5 px-4 py-2 rounded-full shadow-sm">
+      <!-- <div class="w-4 h-4 rounded overflow-hidden flex-shrink-0 flex items-center justify-center">
+        <img src="assets/img/logo.png" alt="CoreUtils Shield Logo" class="w-full h-full object-contain" />
+      </div> -->
+      <span class="footer-dot-live"></span>
+      <span data-i18n="footerShield" class="footer-shield-text font-medium text-[var(--text-muted)]">No links or numbers
+        are ever sent to any server.</span>
+    </div>
+  </footer>
+
+  <!-- Application Module Script -->
+  <script type="module" src="assets/js/app.js?v=1788950916441"></script>
+</body>
+
+</html>
