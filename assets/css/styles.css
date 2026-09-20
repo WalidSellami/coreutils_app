@@ -1334,3 +1334,69 @@ footer {
     font-size: 0.725rem;
   }
 }
+
+/* ==========================================================================
+   FAQ & Semantic SEO Knowledge Guide Accordion Styles
+   ========================================================================== */
+.faq-item {
+  border: 1px solid var(--border-card);
+  border-radius: 0.875rem;
+  background: var(--surface-secondary);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.faq-item:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 4px 20px -4px var(--emerald-subtle);
+}
+
+.faq-item[open] {
+  border-color: rgba(16, 185, 129, 0.5);
+  background: var(--surface-card);
+  box-shadow: 0 8px 30px -8px var(--emerald-glow);
+}
+
+.faq-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  transition: color 0.2s ease;
+}
+
+.faq-summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question {
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.faq-chevron {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 0.75rem;
+}
+
+html[dir="rtl"] .faq-chevron {
+  margin-left: 0;
+  margin-right: 0.75rem;
+}
+
+.faq-item[open] .faq-chevron {
+  transform: rotate(180deg);
+  color: var(--emerald-primary);
+}
+
+.faq-answer {
+  border-top: 1px solid var(--border-card);
+  background: transparent;
+  padding-bottom: 1.15rem;
+}

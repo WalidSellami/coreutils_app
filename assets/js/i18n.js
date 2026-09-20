@@ -88,9 +88,25 @@ export const translations = {
     fieldUrlEmpty: "Please paste or type a web link.",
     fieldUrlInvalid: "Please enter a valid web URL (e.g. https://...)",
     fieldPhoneEmpty: "Please enter a phone number.",
-    fieldPhoneInvalidDigits: "Please enter digits only.",
     footerText: "Pure Client-Side Execution",
-    footerShield: "No links or numbers are ever sent to any server."
+    footerShield: "No links or numbers are ever sent to any server.",
+
+    // SEO & Meta
+    metaTitle: "CoreUtils - Clean Tracking Links & Direct WhatsApp Online",
+    metaDescription: "Free, privacy-first utility suite. Strip 140+ URL tracking parameters (UTM, fbclid, Amazon, TikTok) and open WhatsApp chats directly without saving contacts. Zero server logs.",
+
+    // FAQ & Semantic Guide
+    faqBadge: "Privacy Guide & FAQ",
+    faqHeading: "Frequently Asked Questions",
+    faqSubheading: "Learn how CoreUtils safeguards your digital privacy and streamlines daily web tasks with zero data collection.",
+    faqQ1: "What tracking parameters are removed by the URL Disinfector?",
+    faqA1: "CoreUtils strips over 140 surveillance tokens including Google Analytics (utm_source, utm_medium, gclid, gad_source), Facebook/Meta (fbclid, igshid), TikTok (_t, sender_device), Twitter/X (twclid), and e-commerce tracking from Amazon, AliExpress, and eBay, while safely preserving critical parameters like search queries, video IDs, and timestamps.",
+    faqQ2: "How does Direct WhatsApp work without saving a contact?",
+    faqA2: "CoreUtils utilizes WhatsApp's official deep linking protocol (wa.me) with automatic international dial formatting and country code validation. Your conversation launches directly in the official WhatsApp app or web interface with zero phonebook pollution.",
+    faqQ3: "Is any link or phone number sent to external servers?",
+    faqA3: "No. CoreUtils is 100% zero-backend and runs exclusively inside your browser. No telemetry, no analytical beacons, no cookies, and no database queries exist. Your data stays strictly on your device.",
+    faqQ4: "Can I install CoreUtils on my mobile or desktop device?",
+    faqA4: "Yes. CoreUtils is configured as a lightweight Progressive Web App (PWA). You can select 'Add to Home Screen' or 'Install App' in your browser to launch it anytime with instant performance."
   },
   ar: {
     appTitle: "CoreUtils",
@@ -183,7 +199,24 @@ export const translations = {
     fieldPhoneEmpty: "يرجى كتابة رقم الهاتف.",
     fieldPhoneInvalidDigits: "يرجى إدخال أرقام فقط.",
     footerText: "تنفيذ فوري ومحلي 100% داخل المتصفح",
-    footerShield: "لا يتم إرسال أي رابط أو رقم هاتف إلى أي خادم نهائياً."
+    footerShield: "لا يتم إرسال أي رابط أو رقم هاتف إلى أي خادم نهائياً.",
+
+    // SEO & Meta
+    metaTitle: "CoreUtils - تنظيف وتطهير الروابط وفتح محادثة واتساب مباشر",
+    metaDescription: "مجموعة أدوات سريعة لحماية الخصوصية مجاناً. إزالة أكثر من 140 معرّف تتبع من الروابط، وفتح محادثات واتساب مباشرة دون حفظ جهة الاتصال. بدون أي تسجيلات.",
+
+    // FAQ & Semantic Guide
+    faqBadge: "دليل الخصوصية والأسئلة الشائعة",
+    faqHeading: "الأسئلة الشائعة حول الخصوصية والاستخدام",
+    faqSubheading: "تعرف على كيفية حماية بصمتك الرقمية وتسهيل مهامك اليومية بأمان تام وبدون أي خوادم أو تتبع.",
+    faqQ1: "ما هي معرّفات التتبع التي تتم إزالتها من الروابط؟",
+    faqA1: "يقوم مُطهّر الروابط بإزالة أكثر من 140 معرّف تتبع بما فيها معرّفات إعلانات جوجل وميتا وتيك توك وتويتر ورسائل البريد والتسوق (مثل utm_*، fbclid، gclid)، مع الحفاظ التام والذكي على المعطيات الهامة مثل هوية الفيديو على يوتيوب أو استعلامات البحث وتوقيت المقاطع.",
+    faqQ2: "كيف يعمل رابط واتساب المباشر دون حفظ الرقم في جهات الاتصال؟",
+    faqA2: "يعتمد CoreUtils على بروتوكول واتساب الرسمي المباشر مع التحقق التلقائي من تنسيق أرقام الهواتف ورموز الدول (مثل التنسيق الخاص بالجزائر والدول العربية والعالمية)، مما يتيح لك بدء المحادثة فوراً دون الحاجة لتسجيل جهة اتصال مؤقتة في هاتفك.",
+    faqQ3: "هل يتم تخزين أو إرسال أي رابط أو رقم هاتف إلى خوادم خارجية؟",
+    faqA3: "إطلاقاً. يعمل CoreUtils بنسبة 100% داخل متصفحك محلياً فقط. لا توجد خوادم وسيطة، ولا أي أدوات تحليلات أو كوكيز، ولا يتم إرسال أي رقم أو رابط للخارج نهائياً.",
+    faqQ4: "هل يمكنني تثبيت واستخدام CoreUtils كتطبيق على الهاتف أو الكمبيوتر؟",
+    faqA4: "نعم، تم إعداد الموقع كتطبيق ويب تقدمي (PWA). يمكنك تثبيته بسهولة عبر خيار 'إضافة إلى الشاشة الرئيسية' في متصفح هاتفك أو حاسوبك، ويعمل بشكل سريع ومستقل تماماً."
   }
 };
 
@@ -217,6 +250,23 @@ export function applyLanguage(lang) {
       el.textContent = dict[key];
     }
   });
+
+  // Dynamic SEO meta update on language switch
+  if (dict.metaTitle) {
+    document.title = dict.metaTitle;
+  }
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc && dict.metaDescription) {
+    metaDesc.setAttribute("content", dict.metaDescription);
+  }
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle && dict.metaTitle) {
+    ogTitle.setAttribute("content", dict.metaTitle);
+  }
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  if (ogDesc && dict.metaDescription) {
+    ogDesc.setAttribute("content", dict.metaDescription);
+  }
 
   // Translate placeholders with data-i18n-placeholder
   document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
