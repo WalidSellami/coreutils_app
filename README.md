@@ -2,7 +2,7 @@
 
 > Ultra-fast, zero-backend, privacy-centric utility web suite. Runs 100% client-side with zero telemetry and sub-millisecond execution.
 
-**Live Application:** [https://coreutils.pages.dev](https://coreutils.pages.dev)
+**Live Web App:** [https://coreutils.pages.dev](https://coreutils.pages.dev)
 
 ---
 

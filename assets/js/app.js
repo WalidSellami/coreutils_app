@@ -4,8 +4,8 @@
  * bilingual i18n morphing, clipboard API, and modules.
  */
 
-import { getCurrentLanguage, setLanguage, applyLanguage, t } from './i18n.js?v=1788950916441';
-import { disinfectUrl, isAcceptableUrl, normalizeUrlInput } from './disinfector.js?v=1788950916441';
+import { getCurrentLanguage, setLanguage, applyLanguage, t } from './i18n.js?v=1789948812462';
+import { disinfectUrl, isAcceptableUrl, normalizeUrlInput } from './disinfector.js?v=1789948812462';
 import {
   COUNTRY_CODES,
   sanitizePhoneNumber,
@@ -13,7 +13,7 @@ import {
   getRecentNumbers,
   saveRecentNumber,
   clearRecentHistory
-} from './whatsapp.js?v=1788950916441';
+} from './whatsapp.js?v=1789948812462';
 
 // DOM Elements
 const themeToggleBtn = document.getElementById('themeToggleBtn');
