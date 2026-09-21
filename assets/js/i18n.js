@@ -92,7 +92,7 @@ export const translations = {
     footerShield: "No links or numbers are ever sent to any server.",
 
     // SEO & Meta
-    metaTitle: "CoreUtils - Clean Tracking Links & Direct WhatsApp Online",
+    metaTitle: "CoreUtils",
     metaDescription: "Free, privacy-first utility suite. Strip 140+ URL tracking parameters (UTM, fbclid, Amazon, TikTok) and open WhatsApp chats directly without saving contacts. Zero server logs.",
 
     // FAQ & Semantic Guide
@@ -202,7 +202,7 @@ export const translations = {
     footerShield: "لا يتم إرسال أي رابط أو رقم هاتف إلى أي خادم نهائياً.",
 
     // SEO & Meta
-    metaTitle: "CoreUtils - تنظيف وتطهير الروابط وفتح محادثة واتساب مباشر",
+    metaTitle: "CoreUtils",
     metaDescription: "مجموعة أدوات سريعة لحماية الخصوصية مجاناً. إزالة أكثر من 140 معرّف تتبع من الروابط، وفتح محادثات واتساب مباشرة دون حفظ جهة الاتصال. بدون أي تسجيلات.",
 
     // FAQ & Semantic Guide
